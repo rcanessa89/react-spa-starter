@@ -16,7 +16,24 @@
     "noImplicitAny": true,
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
-    "noUnusedLocals": true
+    "noUnusedLocals": true,
+    "paths": {
+      "@pages": [
+        "src/app/pages"
+      ],
+      "@router": [
+        "src/app/router"
+      ],
+      "@services": [
+        "src/app/services"
+      ],
+      "@share": [
+        "src/app/share"
+      ],
+      "@utils": [
+        "src/app/utils"
+      ]
+    }
   },
   "exclude": [
     "node_modules",
