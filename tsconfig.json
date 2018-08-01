@@ -18,6 +18,18 @@
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": true,
     "paths": {
+      "@interfaces": [
+        "src/interfaces"
+      ],
+      "@redux/*": [
+        "src/redux/*"
+      ],
+      "@actions/*": [
+        "src/redux/*/actions"
+      ],
+      "@store": [
+        "src/store"
+      ],
       "@pages": [
         "src/app/pages"
       ],
@@ -25,13 +37,13 @@
         "src/app/router"
       ],
       "@services": [
-        "src/app/services"
+        "src/services"
       ],
       "@share": [
         "src/app/share"
       ],
       "@utils": [
-        "src/app/utils"
+        "src/utils"
       ]
     }
   },

@@ -1,4 +1,5 @@
 import { history, routes } from '@router';
+import { guid } from '@utils';
 import * as React from 'react';
 import { ReactElement } from 'react';
 import { Router, Switch } from 'react-router-dom';
@@ -29,10 +30,12 @@ class AppRouter extends React.PureComponent<IAppRouterProps, IAppRouteState> {
 
   // Return a unique route element
   private buildRoute(isAuthorized: boolean, route: IAppRoute): ReactElement<IAppRouteProps> {
+    const key = guid();
+
     if (route.public) {
       return (
         <PublicRoute
-          key={route.path}
+          key={key}
           isAuthorized={isAuthorized}
           component={route.component}
           {...route}
@@ -42,7 +45,7 @@ class AppRouter extends React.PureComponent<IAppRouterProps, IAppRouteState> {
 
     return (
       <ProtectedRoute
-        key={route.path}
+        key={key}
         isAuthorized={isAuthorized}
         component={route.component}
         {...route}
@@ -50,13 +53,13 @@ class AppRouter extends React.PureComponent<IAppRouterProps, IAppRouteState> {
     );
   }
 
-  // Return an array of route elements with children routes
+  // Return an array of route elements with nested routes
   private buildRouterRoutes(isAuthorized: boolean, routesArray: IAppRoute[]): Array<ReactElement<IAppRouteProps>> {
     return routesArray.map((route: any) => {
-      if (route.children) {
+      if (route.nested) {
         route = {
           ...route,
-          children: this.buildRouterRoutes(isAuthorized, route.children),
+          nested: this.buildRouterRoutes(isAuthorized, route.nested),
         };
       }
 

@@ -6,4 +6,5 @@ export interface IAppRouteProps extends RouteProps {
 
 export interface IAppRoute extends RouteProps {
   public?: boolean;
+  nested?: IAppRoute[];
 };
