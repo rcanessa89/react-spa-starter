@@ -1,4 +1,4 @@
-import { IAppRoute } from '../interfaces';
+import { IAppRoute } from '@interfaces';
 import paths from './paths';
 
 // Route Components

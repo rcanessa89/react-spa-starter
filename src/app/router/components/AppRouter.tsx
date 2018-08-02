@@ -1,5 +1,5 @@
 import { routerSetState } from '@actions/router';
-import { IRouteState } from '@interfaces';
+import { IAppRoute, IRouteState } from '@interfaces';
 import { history, routes } from '@router';
 import store from '@store';
 import { guid } from '@utils';
@@ -20,11 +20,6 @@ interface IDefaultProps {
 
 interface IAppRouteProps extends RouteProps {
   isAuthorized: boolean;
-};
-
-interface IAppRoute extends RouteProps {
-  public?: boolean;
-  nested?: IAppRoute[];
 };
 
 class AppRouter extends React.PureComponent<IAppRouterProps> {
