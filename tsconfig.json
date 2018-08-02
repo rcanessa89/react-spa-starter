@@ -30,8 +30,8 @@
       "@store": [
         "src/store"
       ],
-      "@pages": [
-        "src/app/pages"
+      "@pages/*": [
+        "src/app/pages/*"
       ],
       "@router": [
         "src/app/router"

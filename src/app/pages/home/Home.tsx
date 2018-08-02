@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { LoadingComponentProps } from 'react-loadable';
 import logo from '../../../logo.svg';
 import './Home.css';
 
@@ -6,14 +7,11 @@ import store from '@store';
 
 import { authRequest } from '@actions/auth';
 
-interface ITest {
+interface ITest extends LoadingComponentProps {
   nested: any;
 };
 
 const Home: React.SFC<ITest> = (props) => {
-
-  console.log(props);
-
   store.dispatch(authRequest());
 
   return (
