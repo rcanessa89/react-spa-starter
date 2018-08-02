@@ -1,4 +1,3 @@
-// import { IStore } from '@interfaces';
 import { Epic, ofType } from 'redux-observable';
 import { of } from 'rxjs';
 import { ajax, AjaxResponse } from 'rxjs/ajax';

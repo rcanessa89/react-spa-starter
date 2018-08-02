@@ -1,9 +1,12 @@
+import { routerSetState } from '@actions/router';
+import { IRouteState } from '@interfaces';
 import { history, routes } from '@router';
+import store from '@store';
 import { guid } from '@utils';
+import { UnregisterCallback } from 'history';
 import * as React from 'react';
 import { ReactElement } from 'react';
-import { Router, Switch } from 'react-router-dom';
-import { IAppRoute, IAppRouteProps } from '../interfaces';
+import { RouteProps, Router, Switch } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute';
 import PublicRoute from './PublicRoute';
 
@@ -11,19 +14,48 @@ interface IAppRouterProps {
   isAuthorized: boolean;
 };
 
-interface IAppRouteState {
+interface IDefaultProps {
+  readonly isAuthorized: boolean;
+};
+
+interface IAppRouteProps extends RouteProps {
   isAuthorized: boolean;
 };
 
-class AppRouter extends React.PureComponent<IAppRouterProps, IAppRouteState> {
-  public static state = {
-    isAuthorized: false,
+interface IAppRoute extends RouteProps {
+  public?: boolean;
+  nested?: IAppRoute[];
+};
+
+class AppRouter extends React.PureComponent<IAppRouterProps> {
+  public static defaultProps: IDefaultProps = {
+    isAuthorized: true,
   };
 
-  public render() {
+  private unlisten: UnregisterCallback;
+
+  public componentDidMount(): void {
+    this.unlisten = history.listen((location, action) => {
+      const fromRouterState: IRouteState = store.getState().router.to;
+      const toRouterState: IRouteState = { location, action };
+
+      store.dispatch(routerSetState({
+        from: fromRouterState,
+        to: toRouterState,
+      }));
+    });
+  }
+
+  public componentWillUnmount(): void {
+    this.unlisten();
+  }
+
+  public render(): React.ReactNode {
+    const routerRoutes = this.buildRouterRoutes(this.props.isAuthorized, routes);
+
     return (
       <Router history={history}>
-        <Switch>{this.buildRouterRoutes(this.props.isAuthorized, routes)}</Switch>
+        <Switch>{routerRoutes}</Switch>
       </Router>
     );
   }
