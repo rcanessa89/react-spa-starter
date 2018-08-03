@@ -9,8 +9,14 @@ const home: IAppRoute = {
   path: paths.home,
 };
 
+const test: IAppRoute = {
+  component: Home,
+  path: '/test',
+};
+
 const routes: IAppRoute[] = [
   home,
+  test,
 ];
 
 export default routes;

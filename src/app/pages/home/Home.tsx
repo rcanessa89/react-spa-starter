@@ -5,14 +5,25 @@ import './Home.css';
 
 import store from '@store';
 
-import { authRequest } from '@actions/auth';
+import { fetchData } from '@actions/fetch';
+
+import { authRequestFailed, authRequestSuccess } from '@actions/auth';
+
+import { Link } from 'react-router-dom'
 
 interface ITest extends LoadingComponentProps {
   nested: any;
 };
 
 const Home: React.SFC<ITest> = (props) => {
-  store.dispatch(authRequest());
+  store.dispatch(fetchData({
+    failed: authRequestFailed,
+    options: {
+      method: 'GET',
+      url: 'https://reqres.in/api/users/2',
+    },
+    success: authRequestSuccess,
+  }));
 
   return (
     <div className="App">
@@ -20,6 +31,10 @@ const Home: React.SFC<ITest> = (props) => {
         <img src={logo} className="App-logo" alt="logo" />
         <h1 className="App-title">Welcome to React</h1>
       </header>
+      <p>
+        <Link to="/home">home</Link>
+        <Link to="/test">test</Link>
+      </p>
       <p className="App-intro">
       {props.nested}
       </p>
