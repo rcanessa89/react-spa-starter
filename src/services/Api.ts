@@ -8,7 +8,7 @@ import {
 type httpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
 export default class Api {
-  private baseUrl: '';
+  private baseUrl: string = 'https://reqres.in/api';
   private config: AjaxRequest;
   private defaultConfig: AjaxRequest = {};
 

@@ -20,7 +20,7 @@ const Home: React.SFC<ITest> = (props) => {
     failed: authRequestFailed,
     options: {
       method: 'GET',
-      url: 'https://reqres.in/api/users/2',
+      url: 'users/2',
     },
     success: authRequestSuccess,
   }));
