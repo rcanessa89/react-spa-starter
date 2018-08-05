@@ -31,12 +31,12 @@ class AppRouter extends React.PureComponent<IAppRouterProps> {
 
   public componentDidMount(): void {
     this.unlisten = history.listen((location, action) => {
-      const fromRouterState: IRouteState = store.getState().router.to;
-      const toRouterState: IRouteState = { location, action };
+      const fromRouterState: IRouteState = store.getState().router.current;
+      const currentRouterState: IRouteState = { location, action };
 
       store.dispatch(routerSetState({
         from: fromRouterState,
-        to: toRouterState,
+        current: currentRouterState,
       }));
     });
   }

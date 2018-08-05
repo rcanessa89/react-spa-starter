@@ -4,12 +4,12 @@ import { ROUTER_SET_STATE } from './types';
 
 interface IState {
   readonly from: IRouteState | null;
-  readonly to: IRouteState | null;
+  readonly current: IRouteState | null;
 };
 
 const initialState: IState = {
   from: null,
-  to: null,
+  current: null,
 };
 
 export default createReducer<IState>(initialState, {
