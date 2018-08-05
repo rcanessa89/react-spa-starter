@@ -1,5 +1,6 @@
+import { fetchDataCancel } from '@actions/fetch';
 import { routerSetState } from '@actions/router';
-import { IAppRoute, IRouteState } from '@interfaces';
+import { IAppRoute, IRouteState, IStore } from '@interfaces';
 import { history, routes } from '@router';
 import store from '@store';
 import { guid } from '@utils';
@@ -31,7 +32,13 @@ class AppRouter extends React.PureComponent<IAppRouterProps> {
 
   public componentDidMount(): void {
     this.unlisten = history.listen((location, action) => {
-      const fromRouterState: IRouteState = store.getState().router.current;
+      const state: IStore = store.getState();
+
+      if (state.fetch.loading) {
+        store.dispatch(fetchDataCancel());
+      }
+
+      const fromRouterState: IRouteState = state.router.current;
       const currentRouterState: IRouteState = { location, action };
 
       store.dispatch(routerSetState({
