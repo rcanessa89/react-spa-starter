@@ -3,13 +3,13 @@ import { createReducer } from '@utils';
 import { ROUTER_SET_STATE } from './types';
 
 interface IState {
-  readonly from: IRouteState | null;
   readonly current: IRouteState | null;
+  readonly from: IRouteState | null;
 };
 
 const initialState: IState = {
-  from: null,
   current: null,
+  from: null,
 };
 
 export default createReducer<IState>(initialState, {

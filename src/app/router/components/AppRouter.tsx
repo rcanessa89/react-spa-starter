@@ -35,8 +35,8 @@ class AppRouter extends React.PureComponent<IAppRouterProps> {
       const currentRouterState: IRouteState = { location, action };
 
       store.dispatch(routerSetState({
-        from: fromRouterState,
         current: currentRouterState,
+        from: fromRouterState,
       }));
     });
   }
