@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { LoadingComponentProps } from 'react-loadable';
 import logo from '../../../logo.svg';
-import './Home.css';
+import './home.css';
 
 import store from '@store';
 

@@ -16,7 +16,7 @@
     "rxjs": "^6.2.2"
   },
   "scripts": {
-    "start": "concurrently \"node-sass-chokidar --include-path src/scss src/ -o src/ --watch --recursive --output-style compressed\" \"react-scripts-ts start\"",
+    "start": "concurrently \"node-sass-chokidar --include-path src/scss src/ !src/scss -o src/ --watch --recursive --output-style compressed\" \"react-scripts-ts start\"",
     "build": "node-sass-chokidar --include-path src/scss src/ -o src/ --output-style compressed && react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject"
