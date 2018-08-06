@@ -28,5 +28,11 @@ export default (): Store<IStore> => {
 
   epicMiddleware.run(combineEpics(...rootEpic));
 
+  if ((module as any).hot) {
+    (module as any).hot.accept('../rootReducers', () => {
+      store.replaceReducer(combineReducers(rootReducer));
+    });
+  }
+
   return store;
 };
