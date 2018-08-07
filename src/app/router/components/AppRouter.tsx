@@ -1,13 +1,14 @@
 import { fetchDataCancel } from '@actions/fetch';
 import { routerSetState } from '@actions/router';
 import { IAppRoute, IRouteState, IStore } from '@interfaces';
+import NotFound from '@pages/not-found';
 import { history, routes } from '@router';
 import store from '@store';
 import { guid } from '@utils';
 import { UnregisterCallback } from 'history';
 import * as React from 'react';
 import { ReactElement } from 'react';
-import { RouteProps, Router, Switch } from 'react-router-dom';
+import { Route, RouteProps, Router, Switch } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute';
 import PublicRoute from './PublicRoute';
 
@@ -57,7 +58,10 @@ class AppRouter extends React.PureComponent<IAppRouterProps> {
 
     return (
       <Router history={history}>
-        <Switch>{routerRoutes}</Switch>
+        <Switch>
+          {routerRoutes}
+          <Route component={NotFound} />
+        </Switch>
       </Router>
     );
   }

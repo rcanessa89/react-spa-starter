@@ -10,8 +10,13 @@ const fetchEpic: Epic<IFetchData> = (action$, state$) => action$.pipe(
   ofType(FETCH_DATA),
   mergeMap((action: IFetchData) => {
     const api = new Api();
+    const {
+      body,
+      method,
+      url,
+    } = action.payload.options;
 
-    return api.call(action.payload.options.url, action.payload.options.method)
+    return api.call(url, method, body)
       .pipe(
         mergeMap((xhr: AjaxResponse) => concat(
           of(fetchDataCompleted()),

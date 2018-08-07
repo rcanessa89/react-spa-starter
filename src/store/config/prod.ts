@@ -6,7 +6,11 @@ import {
   Reducer,
   Store
 } from 'redux';
-import { combineEpics, createEpicMiddleware, EpicMiddleware } from 'redux-observable';
+import {
+  combineEpics,
+  createEpicMiddleware,
+  EpicMiddleware
+} from 'redux-observable';
 import rootEpic from '../rootEpics';
 import rootReducer from '../rootReducers';
 
