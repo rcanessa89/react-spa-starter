@@ -1,6 +1,6 @@
+import { Header } from '@share';
 import * as React from 'react';
 import { LoadingComponentProps } from 'react-loadable';
-import logo from '../../../logo.svg';
 import './home.css';
 
 import store from '@store';
@@ -26,19 +26,15 @@ const Home: React.SFC<ITest> = (props) => {
   }));
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1 className="App-title">Welcome to React</h1>
-      </header>
+    <div className="home">
+      <Header />
       <p>
         <Link to="/home">home</Link>
         <Link to="/test">test</Link>
       </p>
-      <p className="App-intro">
-      {props.nested}
+      <p className="home__intro">
+        {props.nested}
       </p>
-
     </div>
   );
 }

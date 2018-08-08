@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs'
+import { forkJoin, Observable } from 'rxjs'
 import {
   ajax,
   AjaxRequest,
@@ -6,6 +6,12 @@ import {
 } from 'rxjs/ajax';
 
 type httpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+
+interface ICallParams {
+  url: string;
+  method: httpMethod;
+  body?: any;
+};
 
 export default class Api {
   private baseUrl: string = 'https://reqres.in/api';
@@ -28,6 +34,20 @@ export default class Api {
     };
 
     return ajax(config);
+  }
+
+  public callMany(options: ICallParams[]): Observable<AjaxRequest[]> {
+    return forkJoin(
+      ...options.map((option: ICallParams) => {
+        const {
+          body,
+          method,
+          url
+        } = option;
+
+        return this.call(url, method, body);
+      })
+    );
   }
 
   private formatUrl(url: string): string {
