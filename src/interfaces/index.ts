@@ -6,3 +6,4 @@ export { default as IRouteState } from './IRouteState';
 export { default as IRouterState } from './IRouterState';
 export { default as IAppRoute } from './IAppRoute';
 export { default as IFetchDataPayload } from './IFetchDataPayload';
+export { default as IAuthCredentials } from './IAuthCredentials';

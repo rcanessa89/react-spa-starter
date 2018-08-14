@@ -1,6 +1,7 @@
 import { fetchDataCancel } from '@actions/fetch';
 import { routerSetState } from '@actions/router';
-import { IAppRoute, IRouteState, IStore } from '@interfaces';
+import { AuthContainer } from '@containers';
+import { IAppRoute, IAuth, IRouteState, IStore } from '@interfaces';
 import NotFound from '@pages/not-found';
 import { history, routes } from '@router';
 import store from '@store';
@@ -12,12 +13,8 @@ import { Route, RouteProps, Router, Switch } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute';
 import PublicRoute from './PublicRoute';
 
-interface IAppRouterProps {
+interface IAppRouterProps extends IAuth {
   isAuthorized: boolean;
-};
-
-interface IDefaultProps {
-  readonly isAuthorized: boolean;
 };
 
 interface IAppRouteProps extends RouteProps {
@@ -25,10 +22,6 @@ interface IAppRouteProps extends RouteProps {
 };
 
 class AppRouter extends React.PureComponent<IAppRouterProps> {
-  public static defaultProps: IDefaultProps = {
-    isAuthorized: true,
-  };
-
   private unlisten: UnregisterCallback;
 
   public componentDidMount(): void {
@@ -106,4 +99,4 @@ class AppRouter extends React.PureComponent<IAppRouterProps> {
   }
 }
 
-export default AppRouter;
+export default AuthContainer(AppRouter);
