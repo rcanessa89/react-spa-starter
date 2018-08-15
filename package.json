@@ -35,5 +35,19 @@
     "redux-logger": "^3.0.6",
     "typescript": "^2.9.2",
     "why-did-you-update": "^0.1.1"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "@interfaces": "<rootDir>/src/interfaces",
+      "@share": "<rootDir>/src/app/share",
+      "@router": "<rootDir>/src/app/router",
+      "@actions/(.*)": "<rootDir>/src/redux/$1/actions",
+      "@utils": "<rootDir>/src/utils",
+      "@containers": "<rootDir>/src/app/containers",
+      "@pages/(.*)": "<rootDir>/src/app/pages/$1",
+      "@store": "<rootDir>/src/store",
+      "@redux/(.*)": "<rootDir>/src/redux/$1",
+      "@services": "<rootDir>/src/services"
+    }
   }
 }

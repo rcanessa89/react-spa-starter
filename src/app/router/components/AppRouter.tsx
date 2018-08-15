@@ -2,7 +2,7 @@ import { fetchDataCancel } from '@actions/fetch';
 import { routerSetState } from '@actions/router';
 import { AuthContainer } from '@containers';
 import { IAppRoute, IAuth, IRouteState, IStore } from '@interfaces';
-import NotFound from '@pages/not-found';
+import NotFound from '@pages/NotFound';
 import { history, routes } from '@router';
 import store from '@store';
 import { guid } from '@utils';

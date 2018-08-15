@@ -2,21 +2,16 @@ import { IAppRoute } from '@interfaces';
 import paths from './paths';
 
 // Route Components
-import Home from '@pages/home';
+import Home from '@pages/Home';
 
 const home: IAppRoute = {
   component: Home,
+  exact: true,
   path: paths.home,
-};
-
-const test: IAppRoute = {
-  component: Home,
-  path: '/test',
 };
 
 const routes: IAppRoute[] = [
   home,
-  test,
 ];
 
 export default routes;
