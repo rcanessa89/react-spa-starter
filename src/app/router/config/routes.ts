@@ -15,6 +15,7 @@ const login: IAppRoute = {
   component: Login,
   exact: true,
   path: paths.root,
+  public: true,
 };
 
 const routes: IAppRoute[] = [

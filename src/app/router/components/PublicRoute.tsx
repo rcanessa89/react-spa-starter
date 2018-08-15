@@ -10,25 +10,29 @@ interface IPublicRouteProps {
 }
 
 const PublicRoute: SFC<IPublicRouteProps> = ({
-  component,
+  component: Component,
   isAuthorized,
   nested = null,
   ...props
 }) => {
-  const publicRootPath: string = paths.root;
-  const redirect: React.ReactElement<Redirect> = <Redirect to={publicRootPath} />;
-  const RouteComponent: SFC<any> = isAuthorized ? redirect : component;
-  const renderComponent: SFC<any> = (renderProps: RouteProps) => (
-    <RouteComponent
-      {...renderProps}
-      nested={nested}
-    />
-  )
+  const publicRootPath: string = paths.home;
+  const renderComponent: SFC<any> = (renderProps: RouteProps) => {
+    if (isAuthorized) {
+      return <Redirect to={publicRootPath} />;
+    }
+
+    return (
+      <Component
+        {...renderProps}
+        nested={nested}
+      />
+    );
+  };
 
   return (
     <Route
       {...props}
-      component={renderComponent}
+      render={renderComponent}
     />
   );
 };

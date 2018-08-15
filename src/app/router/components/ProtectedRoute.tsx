@@ -10,25 +10,29 @@ interface IProtectedRouteProps {
 };
 
 const ProtectedRoute: SFC<IProtectedRouteProps> = ({
-  component,
+  component: Component,
   isAuthorized,
   nested = null,
   ...props
 }) => {
   const protectedRootPath: string = paths.root;
-  const redirect: React.ReactElement<Redirect> = <Redirect to={protectedRootPath} />;
-  const RouteComponent: SFC<any> = isAuthorized ? component : redirect;
-  const renderComponent: SFC<any> = (renderProps: RouteProps) => (
-    <RouteComponent
-      {...renderProps}
-      nested={nested}
-    />
-  )
+  const renderComponent: SFC<any> = (renderProps: RouteProps) => {
+    if (!isAuthorized) {
+      return <Redirect to={protectedRootPath} />;
+    }
+
+    return (
+      <Component
+        {...renderProps}
+        nested={nested}
+      />
+    );
+  };
 
   return (
     <Route
       {...props}
-      component={renderComponent}
+      render={renderComponent}
     />
   );
 };

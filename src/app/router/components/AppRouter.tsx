@@ -62,6 +62,7 @@ class AppRouter extends React.PureComponent<IAppRouterProps> {
   // Return a unique route element
   private buildRoute(isAuthorized: boolean, route: IAppRoute): ReactElement<IAppRouteProps> {
     const key = guid();
+    console.log(route);
 
     if (route.public) {
       return (
