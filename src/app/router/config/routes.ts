@@ -3,6 +3,7 @@ import paths from './paths';
 
 // Route Components
 import Home from '@pages/Home';
+import Login from '@pages/Login';
 
 const home: IAppRoute = {
   component: Home,
@@ -10,8 +11,15 @@ const home: IAppRoute = {
   path: paths.home,
 };
 
+const login: IAppRoute = {
+  component: Login,
+  exact: true,
+  path: paths.root,
+};
+
 const routes: IAppRoute[] = [
   home,
+  login,
 ];
 
 export default routes;
