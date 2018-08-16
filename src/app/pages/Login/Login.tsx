@@ -1,9 +1,8 @@
-import { AuthContainer } from '@containers';
 import { Header } from '@share';
 import { InjectedFormikProps } from 'formik';
 import * as React from 'react';
 import './login.css';
-import LoginContainer, { IFormProps, IFormValues } from './LoginContainer';
+import { IFormProps, IFormValues } from './LoginContainer';
 
 const emailId = 'login-email-field';
 const passwordId = 'login-password-field';
@@ -50,4 +49,4 @@ const Login: React.SFC<InjectedFormikProps<IFormProps, IFormValues>> = ({
   </div>
 );
 
-export default AuthContainer(LoginContainer(Login));
+export default Login;

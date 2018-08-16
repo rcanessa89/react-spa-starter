@@ -1,6 +1,5 @@
-import  * as Loadable from 'react-loadable';
+import { AuthContainer } from '@containers';
+import Login from './Login';
+import LoginContainer from './LoginContainer';
 
-export default Loadable({
-  loader: () => import('./Login'),
-  loading: () => null,
-});
+export default AuthContainer(LoginContainer(Login));

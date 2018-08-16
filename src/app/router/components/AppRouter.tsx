@@ -2,10 +2,9 @@ import { fetchDataCancel } from '@actions/fetch';
 import { routerSetState } from '@actions/router';
 import { AuthContainer } from '@containers';
 import { IAppRoute, IAuth, IRouteState, IStore } from '@interfaces';
-import NotFound from '@pages/NotFound';
 import { history, routes } from '@router';
 import store from '@store';
-import { guid } from '@utils';
+import { CreateAsyncComponent, guid } from '@utils';
 import { UnregisterCallback } from 'history';
 import * as React from 'react';
 import { ReactElement } from 'react';
@@ -13,15 +12,11 @@ import { Route, RouteProps, Router, Switch } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute';
 import PublicRoute from './PublicRoute';
 
-interface IAppRouterProps extends IAuth {
-  isAuthorized: boolean;
-};
-
 interface IAppRouteProps extends RouteProps {
   isAuthorized: boolean;
 };
 
-class AppRouter extends React.Component<IAppRouterProps> {
+export class AppRouter extends React.Component<IAuth> {
   private unlisten: UnregisterCallback;
 
   public componentDidMount(): void {
@@ -46,7 +41,7 @@ class AppRouter extends React.Component<IAppRouterProps> {
     this.unlisten();
   }
 
-  public shouldComponentUpdate(nextProps: IAppRouterProps): boolean {
+  public shouldComponentUpdate(nextProps: IAuth): boolean {
     return this.props.isAuthorized !== nextProps.isAuthorized;
   }
 
@@ -57,7 +52,7 @@ class AppRouter extends React.Component<IAppRouterProps> {
       <Router history={history}>
         <Switch>
           {routerRoutes}
-          <Route component={NotFound} />
+          <Route component={CreateAsyncComponent(() => import('@pages/NotFound'))} />
         </Switch>
       </Router>
     );

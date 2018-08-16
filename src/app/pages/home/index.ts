@@ -1,6 +1,1 @@
-import  * as Loadable from 'react-loadable';
-
-export default Loadable({
-  loader: () => import('./Home'),
-  loading: () => null,
-});
+export { default } from './Home';

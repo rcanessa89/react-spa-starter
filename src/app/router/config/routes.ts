@@ -1,18 +1,15 @@
 import { IAppRoute } from '@interfaces';
+import { CreateAsyncComponent } from '@utils';
 import paths from './paths';
 
-// Route Components
-import Home from '@pages/Home';
-import Login from '@pages/Login';
-
 const home: IAppRoute = {
-  component: Home,
+  component: CreateAsyncComponent(() => import('@pages/Home')),
   exact: true,
   path: paths.home,
 };
 
 const login: IAppRoute = {
-  component: Login,
+  component: CreateAsyncComponent(() => import('@pages/Login')),
   exact: true,
   path: paths.root,
   public: true,
