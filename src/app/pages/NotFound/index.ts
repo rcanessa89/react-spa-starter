@@ -1,6 +1,6 @@
 import  * as Loadable from 'react-loadable';
 
 export default Loadable({
-  loader: () => import('./not-found'),
+  loader: () => import('./NotFound'),
   loading: () => null,
 });

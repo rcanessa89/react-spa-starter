@@ -21,7 +21,7 @@ interface IAppRouteProps extends RouteProps {
   isAuthorized: boolean;
 };
 
-class AppRouter extends React.PureComponent<IAppRouterProps> {
+class AppRouter extends React.Component<IAppRouterProps> {
   private unlisten: UnregisterCallback;
 
   public componentDidMount(): void {
@@ -46,6 +46,10 @@ class AppRouter extends React.PureComponent<IAppRouterProps> {
     this.unlisten();
   }
 
+  public shouldComponentUpdate(nextProps: IAppRouterProps): boolean {
+    return this.props.isAuthorized !== nextProps.isAuthorized;
+  }
+
   public render(): React.ReactNode {
     const routerRoutes = this.buildRouterRoutes(this.props.isAuthorized, routes);
 
@@ -62,7 +66,6 @@ class AppRouter extends React.PureComponent<IAppRouterProps> {
   // Return a unique route element
   private buildRoute(isAuthorized: boolean, route: IAppRoute): ReactElement<IAppRouteProps> {
     const key = guid();
-    console.log(route);
 
     if (route.public) {
       return (

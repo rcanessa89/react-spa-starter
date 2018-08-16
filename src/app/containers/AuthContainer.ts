@@ -1,11 +1,11 @@
-import { authOff, authRequestFailed, authRequestSuccess } from '@actions/auth';
+import { authOff, authRequestFailed, authRequestSuccess, IAuthOff } from '@actions/auth';
 import { FetchAction, fetchData } from '@actions/fetch';
 import { IAuthCredentials, IStore } from '@interfaces';
 import { connect, Dispatch } from 'react-redux';
 
 const mapStateToProps = ({ auth }: IStore) => auth;
 
-const mapDispatchToProps = (dispatch: Dispatch<FetchAction>) => ({
+const mapDispatchToProps = (dispatch: Dispatch<FetchAction | IAuthOff>) => ({
   login: (payload: IAuthCredentials) => dispatch(fetchData({
     failed: authRequestFailed,
     options: {
