@@ -13,6 +13,15 @@ const render = (Component: typeof React.Component) => ReactDOM.render(
 
 render(App);
 
+if (process.env.NODE_ENV === 'development') {
+  import('why-did-you-update')
+    .then(({ whyDidYouUpdate }) => {
+      whyDidYouUpdate(React, {
+        exclude: RegExp(/^(Switch)$/)
+      });
+    });
+}
+
 if ((module as any).hot) {
   (module as any).hot.accept('./App', () => {
     const NextApp = require('./App').default;
