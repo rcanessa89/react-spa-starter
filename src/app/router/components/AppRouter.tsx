@@ -20,6 +20,13 @@ export class AppRouter extends React.Component<IAuth> {
   private unlisten: UnregisterCallback;
 
   public componentDidMount(): void {
+    const initialState: IRouteState = {
+      action: history.action,
+      location: history.location,
+    };
+
+    this.dispatchRouteChange(initialState);
+
     this.unlisten = history.listen((location, action) => {
       const state: IStore = store.getState();
 
@@ -30,10 +37,7 @@ export class AppRouter extends React.Component<IAuth> {
       const fromRouterState: IRouteState = state.router.current;
       const currentRouterState: IRouteState = { location, action };
 
-      store.dispatch(routerSetState({
-        current: currentRouterState,
-        from: fromRouterState,
-      }));
+      this.dispatchRouteChange(currentRouterState, fromRouterState);
     });
   }
 
@@ -95,6 +99,15 @@ export class AppRouter extends React.Component<IAuth> {
 
       return this.buildRoute(isAuthorized, route);
     });
+  }
+
+  private dispatchRouteChange(current: IRouteState, from?: IRouteState) {
+    const fromValue: IRouteState | null = from || null;
+
+    store.dispatch(routerSetState({
+      current,
+      from: fromValue,
+    }));
   }
 }
 
