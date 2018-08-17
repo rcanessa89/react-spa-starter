@@ -1,6 +1,6 @@
 import { AppRouter } from '@router';
 import store from '@store';
-import { configure, shallow } from 'enzyme';
+import { configure, shallow, ShallowWrapper } from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
 import toJson from 'enzyme-to-json';
 import * as React from 'react';
@@ -10,7 +10,11 @@ import App from '../App';
 configure({ adapter: new Adapter() });
 
 describe('<App />', () => {
-  const shallowApp = shallow(<App />);
+  let shallowApp: ShallowWrapper;
+
+  beforeEach(() => {
+    shallowApp = shallow(<App />);
+  });
 
   it('Matches the snapshot', () => {
     expect(toJson(shallowApp)).toMatchSnapshot();
