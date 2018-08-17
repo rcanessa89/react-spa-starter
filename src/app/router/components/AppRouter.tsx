@@ -17,28 +17,11 @@ interface IAppRouteProps extends RouteProps {
 };
 
 export class AppRouter extends React.Component<IAuth> {
-  private unlisten: UnregisterCallback;
+  private unlisten = this.historyListener();
 
   public componentDidMount(): void {
-    const initialState: IRouteState = {
-      action: history.action,
-      location: history.location,
-    };
 
-    this.dispatchRouteChange(initialState);
-
-    this.unlisten = history.listen((location, action) => {
-      const state: IStore = store.getState();
-
-      if (state.fetch.loading) {
-        store.dispatch(fetchDataCancel());
-      }
-
-      const fromRouterState: IRouteState = state.router.current;
-      const currentRouterState: IRouteState = { location, action };
-
-      this.dispatchRouteChange(currentRouterState, fromRouterState);
-    });
+    this.setInitialRouteState();
   }
 
   public componentWillUnmount(): void {
@@ -101,13 +84,51 @@ export class AppRouter extends React.Component<IAuth> {
     });
   }
 
-  private dispatchRouteChange(current: IRouteState, from?: IRouteState) {
+  private dispatchRouteChange(current: IRouteState, from?: IRouteState): void {
     const fromValue: IRouteState | null = from || null;
 
     store.dispatch(routerSetState({
       current,
       from: fromValue,
     }));
+  }
+
+  private historyListener(): UnregisterCallback {
+    return history.listen((location, action) => {
+      const state: IStore = store.getState();
+
+      if (state.fetch.loading) {
+        store.dispatch(fetchDataCancel());
+      }
+
+      const fromRouterState: IRouteState = state.router.current;
+      const currentRouterState: IRouteState = { location, action };
+      const path = location.pathname;
+
+      this.setDocumentTitle(path);
+      this.dispatchRouteChange(currentRouterState, fromRouterState);
+    });
+  }
+
+  private setInitialRouteState(): void {
+    const initialState: IRouteState = {
+      action: history.action,
+      location: history.location,
+    };
+
+    this.setDocumentTitle(history.location.pathname);
+    this.dispatchRouteChange(initialState);
+  }
+
+  private setDocumentTitle(path: string): void {
+    const filteredRoutes = routes.filter(route => route.path === path);
+    const hasTitle = filteredRoutes.length && filteredRoutes[0].title;
+
+    if (hasTitle) {
+      document.title = filteredRoutes[0].title as string;
+    } else {
+      document.title = '';
+    }
   }
 }
 
