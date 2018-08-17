@@ -1,8 +1,7 @@
-
-import { authRequestSuccess, authRequestFailed } from '@actions/auth';
+import { authRequestFailed, authRequestSuccess } from '@actions/auth';
+import { IAuth, IAuthCredentials } from '@interfaces';
 import { AUTH_OFF } from '@redux/auth/types';
 import { FETCH_DATA } from '@redux/fetch/types';
-import { IAuth, IAuthCredentials } from '@interfaces';
 import { configure, shallow, ShallowWrapper } from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
 import * as React from 'react';
@@ -18,7 +17,7 @@ const WrappedComponent = AuthContainer(Component);
 
 interface IProps  {
   login: (payload: IAuthCredentials) => {};
-  logout: Function;
+  logout: () => void;
   auth: IAuth;
 }
 
@@ -29,27 +28,27 @@ describe('AuthContainer', () => {
   beforeEach(() =>{
     store = mockStore({
       auth: {
-        user: null,
-        message: '',
         isAuthorized: false,
+        message: '',
+        user: null,
       },
     });
     store.dispatch = jest.fn();
 
     wrapper = shallow(<WrappedComponent />, {
       context: {
-        store: store
-      }
+        store,
+      },
     });
   });
 
   it('Maps state and dispatch to props', () => {
     expect(wrapper.props()).toEqual({
-      user: null,
-      message: '',
       isAuthorized: false,
       login: expect.any(Function),
       logout: expect.any(Function),
+      message: '',
+      user: null,
     });
   });
 
@@ -70,8 +69,8 @@ describe('AuthContainer', () => {
     };
 
     const action = {
-      type: FETCH_DATA,
       payload,
+      type: FETCH_DATA,
     };
 
     wrapper.props().login(credentials);
