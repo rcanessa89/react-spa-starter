@@ -1,6 +1,6 @@
 import IRouteState from './IRouteState';
 
 export default interface IRouterState {
-  from: IRouteState;
+  from: IRouteState | null;
   current: IRouteState;
 };

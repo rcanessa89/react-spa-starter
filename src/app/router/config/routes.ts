@@ -6,6 +6,7 @@ const home: IAppRoute = {
   component: CreateAsyncComponent(() => import('@pages/Home')),
   exact: true,
   path: paths.home,
+  title: 'Home',
 };
 
 const login: IAppRoute = {
@@ -13,6 +14,7 @@ const login: IAppRoute = {
   exact: true,
   path: paths.root,
   public: true,
+  title: 'Login',
 };
 
 const routes: IAppRoute[] = [
