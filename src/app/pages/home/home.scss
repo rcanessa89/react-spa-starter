@@ -1,0 +1,12 @@
+@import 'util';
+
+.home {
+  &__intro {
+    font-size: em(24);
+    display: flex;
+  }
+
+  &__title {
+    text-align: center;
+  }
+}

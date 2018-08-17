@@ -4,8 +4,28 @@ import App from './App';
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(
-  <App />,
+registerServiceWorker();
+
+const render = (Component: typeof React.Component) => ReactDOM.render(
+  <Component />,
   document.getElementById('root') as HTMLElement
 );
-registerServiceWorker();
+
+render(App);
+
+if (process.env.NODE_ENV === 'development') {
+  import('why-did-you-update')
+    .then(({ whyDidYouUpdate }) => {
+      whyDidYouUpdate(React, {
+        exclude: RegExp(/^(Switch)$/)
+      });
+    });
+}
+
+if ((module as any).hot) {
+  (module as any).hot.accept('./App', () => {
+    const NextApp = require('./App').default;
+
+    render(NextApp);
+  });
+}

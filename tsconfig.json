@@ -16,7 +16,45 @@
     "noImplicitAny": true,
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
-    "noUnusedLocals": true
+    "noUnusedLocals": true,
+    "paths": {
+      "@interfaces": [
+        "src/interfaces"
+      ],
+      "@redux/*": [
+        "src/redux/*"
+      ],
+      "@actions/*": [
+        "src/redux/*/actions"
+      ],
+      "@store": [
+        "src/store"
+      ],
+      "@pages/*": [
+        "src/app/pages/*"
+      ],
+      "@router": [
+        "src/app/router"
+      ],
+      "@services": [
+        "src/services"
+      ],
+      "@share": [
+        "src/app/share"
+      ],
+      "@utils": [
+        "src/utils"
+      ],
+      "@img/*": [
+        "src/assets/img/*"
+      ],
+      "@containers": [
+        "src/app/containers"
+      ],
+      "@constants": [
+        "src/constants"
+      ]
+    }
   },
   "exclude": [
     "node_modules",
