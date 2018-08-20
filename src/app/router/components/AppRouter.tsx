@@ -18,9 +18,9 @@ interface IAppRouteProps extends RouteProps {
 
 export class AppRouter extends React.Component<IAuth> {
   private unlisten = this.historyListener();
+  private plainRoutes: IAppRoute[] = [];
 
   public componentDidMount(): void {
-
     this.setInitialRouteState();
   }
 
@@ -47,6 +47,8 @@ export class AppRouter extends React.Component<IAuth> {
 
   // Return a unique route element
   private buildRoute(isAuthorized: boolean, route: IAppRoute): ReactElement<IAppRouteProps> {
+    this.plainRoutes.push(route);
+
     const key = guid();
 
     if (route.public) {
@@ -103,9 +105,8 @@ export class AppRouter extends React.Component<IAuth> {
 
       const fromRouterState: IRouteState = state.router.current;
       const currentRouterState: IRouteState = { location, action };
-      const path = location.pathname;
 
-      this.setDocumentTitle(path);
+      this.setDocumentTitle(location.pathname);
       this.dispatchRouteChange(currentRouterState, fromRouterState);
     });
   }
