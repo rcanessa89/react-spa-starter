@@ -1,3 +1,4 @@
+import { getEnvVar } from '@utils';
 import { forkJoin, Observable } from 'rxjs';
 import {
   ajax,
@@ -14,9 +15,9 @@ interface ICallParams {
 };
 
 export default class Api {
-  private baseUrl: string = 'https://reqres.in/api';
-  private config: AjaxRequest;
-  private defaultConfig: AjaxRequest = {};
+  private readonly baseUrl: string = getEnvVar('base_api_url');
+  private readonly config: AjaxRequest;
+  private readonly defaultConfig: AjaxRequest = {};
 
   constructor(config: AjaxRequest = {}) {
     this.config = {
