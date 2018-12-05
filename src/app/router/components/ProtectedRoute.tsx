@@ -1,24 +1,43 @@
+import { IAppRoute } from '@interfaces';
 import { paths } from '@router';
 import * as React from 'react';
 import { SFC } from 'react';
-import { Redirect, Route, RouteProps } from 'react-router-dom';
+import {
+  matchPath,
+  Redirect,
+  Route,
+  RouteProps
+} from 'react-router-dom';
 
-interface IProtectedRouteProps {
+interface IProtectedRouteProps extends IAppRoute {
   component: any;
   isAuthorized: boolean;
-  nested?: any[];
 };
 
 const ProtectedRoute: SFC<IProtectedRouteProps> = ({
   component: Component,
   isAuthorized,
   nested = null,
+  abstract = false,
   ...props
 }) => {
-  const protectedRootPath: string = paths.root;
   const renderComponent: SFC<any> = (renderProps: RouteProps) => {
+    const matchParams = {
+      exact: !!props.exact,
+      path: props.path,
+      strict: !!props.strict,
+    };
+    const isMatchPath = matchPath(
+      renderProps.location!.pathname,
+      matchParams
+    );
+
+    if (isMatchPath!.isExact && abstract) {
+      return <Redirect to={paths.noMatch} />;
+    }
+
     if (!isAuthorized) {
-      return <Redirect to={protectedRootPath} />;
+      return <Redirect to={paths.protectedRouteRedirect} />;
     }
 
     return (

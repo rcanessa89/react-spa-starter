@@ -18,6 +18,7 @@ const login: IAppRoute = {
 };
 
 const test: IAppRoute = {
+  abstract: true,
   component: CreateAsyncComponent(() => import('@pages/Test')),
   nested: [
     {
