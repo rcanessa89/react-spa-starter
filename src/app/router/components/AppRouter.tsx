@@ -1,7 +1,7 @@
 import { fetchDataCancel } from '@actions/fetch';
 import { routerSetState } from '@actions/router';
 import { AuthContainer } from '@containers';
-import { IAppRoute, IAuth, IRouteState, IStore } from '@interfaces';
+import { IAppRoute, IAuth, IRouteComponentProps, IRouteState, IStore } from '@interfaces';
 import { history, routes } from '@router';
 import store from '@store';
 import { CreateAsyncComponent, guid } from '@utils';
@@ -18,7 +18,7 @@ interface IAppRouteProps extends RouteProps {
 
 export class AppRouter extends React.Component<IAuth> {
   private unlisten = this.historyListener();
-  private plainRoutes: IAppRoute[] = [];
+  private plainRoutes: IRouteComponentProps[] = [];
 
   public componentDidMount(): void {
     this.setInitialRouteState();
@@ -46,7 +46,7 @@ export class AppRouter extends React.Component<IAuth> {
   }
 
   // Return a unique route element
-  private buildRoute(isAuthorized: boolean, route: IAppRoute): ReactElement<IAppRouteProps> {
+  private buildRoute(isAuthorized: boolean, route: IRouteComponentProps): ReactElement<IAppRouteProps> {
     this.plainRoutes.push(route);
 
     const key = guid();

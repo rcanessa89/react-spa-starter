@@ -17,6 +17,7 @@ describe('<ProtectedRoute />', () => {
     <ProtectedRoute
       component={page}
       isAuthorized={isAuthorized}
+      path="/"
     />
   );
 

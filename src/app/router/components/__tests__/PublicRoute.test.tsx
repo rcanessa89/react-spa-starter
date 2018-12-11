@@ -18,6 +18,7 @@ describe('<PublicRoute />', () => {
       <PublicRoute
         component={page}
         isAuthorized={true}
+        path="/"
       />
     );
 
