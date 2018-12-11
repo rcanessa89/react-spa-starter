@@ -1,7 +1,8 @@
 import { authOff, authRequestFailed, authRequestSuccess, IAuthOff } from '@actions/auth';
 import { FetchAction, fetchData } from '@actions/fetch';
 import { IAuthCredentials, IStore } from '@interfaces';
-import { connect, Dispatch } from 'react-redux';
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 
 const mapStateToProps = ({ auth }: IStore) => auth;
 
