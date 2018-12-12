@@ -24,7 +24,7 @@ const PublicRoute: SFC<IRouteComponentProps> = ({
     }
 
     if (isAuthorized) {
-      return <Redirect to={paths.protectedRouteRedirect} />;
+      return <Redirect to={paths.publicRouteRedirect} />;
     }
 
     return (

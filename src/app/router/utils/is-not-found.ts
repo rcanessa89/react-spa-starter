@@ -5,6 +5,7 @@ export default (props: IRouteComponentProps, renderProps: RouteProps): boolean =
   const matchResult = matchPath(
     renderProps.location!.pathname,
     {
+      exact: !!props.exact,
       path: props.path,
     }
   );
@@ -21,6 +22,7 @@ export default (props: IRouteComponentProps, renderProps: RouteProps): boolean =
       const nestedPathMatch = matchPath(
         renderProps.location!.pathname,
         {
+          exact: !!route.props.exact,
           path: route.props.path,
         }
       );
