@@ -1,39 +1,20 @@
 import { IRouteComponentProps } from '@interfaces';
-import { paths } from '@router';
 import * as React from 'react';
 import { SFC } from 'react';
-import {
-  Redirect,
-  Route,
-  RouteProps,
-} from 'react-router-dom';
-import { isNotFound } from '../utils';
+import { Route } from 'react-router-dom';
+import { getRenderRoute } from '../utils';
 
 const PublicRoute: SFC<IRouteComponentProps> = ({
-  component: Component,
+  component,
+  nested,
   ...props
 }) => {
-  const {
-    isAuthorized,
+  const renderComponent: SFC<any> = getRenderRoute({
+    Component: component,
+    isProtected: false,
     nested,
-  } = props;
-
-  const renderComponent: SFC<any> = (renderProps: RouteProps) => {
-    if (isNotFound(props as IRouteComponentProps, renderProps)) {
-      return <Redirect to={paths.noMatch} />;
-    }
-
-    if (isAuthorized) {
-      return <Redirect to={paths.publicRouteRedirect} />;
-    }
-
-    return (
-      <Component
-        {...renderProps}
-        nested={nested}
-      />
-    );
-  };
+    props,
+  });
 
   return (
     <Route
