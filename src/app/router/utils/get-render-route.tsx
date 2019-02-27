@@ -18,7 +18,7 @@ export default (opts: IGetRenderRoute) => (renderProps: RouteProps) => {
 
   const redirectPath = opts.isProtected ? paths.protectedRouteRedirect : paths.publicRouteRedirect;
 
-  if (opts.props.isAuthorized === opts.isProtected) {
+  if (opts.props.isAuthorized !== opts.isProtected) {
     return <Redirect to={redirectPath} />;
   }
 

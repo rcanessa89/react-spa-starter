@@ -1,13 +1,12 @@
 import { Header } from '@share';
-import { InjectedFormikProps } from 'formik';
+import { FormikProps } from 'formik';
 import * as React from 'react';
 import './login.css';
-import { IFormProps, IFormValues } from './LoginContainer';
 
 const emailId = 'login-email-field';
 const passwordId = 'login-password-field';
 
-const Login: React.SFC<InjectedFormikProps<IFormProps, IFormValues>> = ({
+const Login: React.SFC<FormikProps<any>> = ({
   errors,
   handleBlur,
   handleChange,

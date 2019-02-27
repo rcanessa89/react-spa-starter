@@ -1,5 +1,8 @@
-import fetchEpics from '@redux/fetch/epics';
+import authEpics from '@containers/auth/epics';
+import fetchEpics from '@containers/fetch/epics';
+
 
 export default [
+  ...authEpics,
   ...fetchEpics,
 ];

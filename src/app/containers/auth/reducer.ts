@@ -1,24 +1,18 @@
 import { IAction, IUser } from '@interfaces';
 import { createReducer } from '@utils';
+import { IAuthState } from './interfaces';
 import {
   AUTH_OFF,
   AUTH_REQUEST_FAILED,
   AUTH_REQUEST_SUCCESS
 } from './types';
 
-interface IState {
-  readonly isAuthorized: boolean;
-  readonly message: string;
-  readonly user: IUser | null;
-}
-
-const initialState: IState = {
+const initialState: IAuthState = {
   isAuthorized: false,
-  message: '',
   user: null,
 };
 
-export default createReducer<IState>(initialState, {
+export default createReducer<IAuthState>(initialState, {
   [AUTH_REQUEST_SUCCESS](state, action: IAction<IUser>) {
     return {
       isAuthorized: true,

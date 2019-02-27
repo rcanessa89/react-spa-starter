@@ -1,13 +1,9 @@
-import { IAction, IRouterState, IRouteState } from '@interfaces';
+import { IAction} from '@interfaces';
 import { createReducer } from '@utils';
+import { IRouterState, IState } from './interfaces';
 import { ROUTER_SET_STATE } from './types';
 
-interface IState {
-  readonly current: IRouteState | null;
-  readonly from: IRouteState | null;
-};
-
-const initialState: IState = {
+const initialState: IRouterState = {
   current: null,
   from: null,
 };

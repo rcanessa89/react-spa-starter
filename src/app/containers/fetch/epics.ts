@@ -3,10 +3,11 @@ import { Epic, ofType } from 'redux-observable';
 import { concat, of } from 'rxjs';
 import { AjaxError, AjaxResponse } from 'rxjs/ajax';
 import { catchError, mergeMap, takeUntil } from 'rxjs/operators';
-import { fetchDataCompleted, IFetchData } from './actions';
+import { fetchDataCompleted } from './actions';
+import { IFetchData } from './interfaces';
 import { FETCH_DATA, FETCH_DATA_CANCEL } from './types';
 
-const fetchEpic: Epic<IFetchData> = (action$, state$) => action$.pipe(
+const fetchEpic: Epic<IFetchData> = (action$) => action$.pipe(
   ofType(FETCH_DATA),
   mergeMap((action: IFetchData) => {
     const api = new Api();

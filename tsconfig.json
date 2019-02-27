@@ -21,12 +21,6 @@
       "@interfaces": [
         "src/interfaces"
       ],
-      "@redux/*": [
-        "src/redux/*"
-      ],
-      "@actions/*": [
-        "src/redux/*/actions"
-      ],
       "@store": [
         "src/store"
       ],
@@ -48,8 +42,8 @@
       "@img/*": [
         "src/assets/img/*"
       ],
-      "@containers": [
-        "src/app/containers"
+      "@containers/*": [
+        "src/app/containers/*"
       ],
       "@constants": [
         "src/constants"

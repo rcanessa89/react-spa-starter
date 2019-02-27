@@ -1,6 +1,6 @@
-import authReducer from '@redux/auth/reducer';
-import fetchReducer from '@redux/fetch/reducer';
-import routerReducer from '@redux/router/reducer';
+import authReducer from '@containers/auth/reducer';
+import fetchReducer from '@containers/fetch/reducer';
+import routerReducer from '@containers/router/reducer';
 
 export default {
   auth: authReducer,

@@ -1,6 +1,6 @@
-import { fetchDataCancel } from '@actions/fetch';
-import { routerSetState } from '@actions/router';
-import { AuthContainer } from '@containers';
+import AuthContainer from '@containers/auth/AuthContainer';
+import { fetchDataCancel } from '@containers/fetch/actions';
+import { routerSetState } from '@containers/router/actions';
 import { IAppRoute, IAuth, IRouteComponentProps, IRouteState, IStore } from '@interfaces';
 import { history, routes } from '@router';
 import store from '@store';

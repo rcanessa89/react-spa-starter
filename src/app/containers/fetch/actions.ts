@@ -1,24 +1,15 @@
-import { IFetchDataPayload } from '@interfaces';
 import { actionCreator } from '@utils';
+import {
+  IFetchCancel,
+  IFetchData,
+  IFetchDataCompleted,
+  IFetchDataPayload
+} from './interfaces';
 import {
   FETCH_DATA,
   FETCH_DATA_CANCEL,
   FETCH_DATA_COMPLETED
 } from './types';
-
-export interface IFetchData {
-  type: FETCH_DATA;
-  payload: IFetchDataPayload;
-};
-
-export interface IFetchDataCompleted {
-  type: FETCH_DATA_COMPLETED;
-  payload: any;
-};
-
-export interface IFetchCancel {
-  type: FETCH_DATA_CANCEL;
-};
 
 export type FetchAction = IFetchData | IFetchDataCompleted | IFetchCancel;
 
