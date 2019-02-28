@@ -15,4 +15,4 @@ export type FetchAction = IFetchData | IFetchDataCompleted | IFetchCancel;
 
 export const fetchData = actionCreator<IFetchData, IFetchDataPayload>(FETCH_DATA);
 export const fetchDataCompleted = actionCreator<IFetchDataCompleted>(FETCH_DATA_COMPLETED);
-export const fetchDataCancel = actionCreator<IFetchDataCompleted>(FETCH_DATA_CANCEL);
+export const fetchDataCancel = actionCreator<IFetchCancel>(FETCH_DATA_CANCEL);

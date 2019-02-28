@@ -7,7 +7,7 @@ import { authRequestFailed, authRequestSuccess } from './actions';
 import { IAuthRequest } from './interfaces';
 import { AUTH_REQUEST } from './types';
 
-const authEpic = (action$: Observable<IAuthRequest>) => action$.pipe(
+export const authEpic = (action$: Observable<IAuthRequest>) => action$.pipe(
   ofType(AUTH_REQUEST),
   mergeMap((action: IAuthRequest) => {
     const api = new Api();

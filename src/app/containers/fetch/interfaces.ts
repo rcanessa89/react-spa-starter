@@ -6,7 +6,7 @@ import {
   FETCH_DATA_COMPLETED
 } from './types';
 
-type method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+export type method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
 interface IFetchDataPayloadOptions {
   body?: object;

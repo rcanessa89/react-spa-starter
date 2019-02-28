@@ -20,9 +20,3 @@ export const authRequest = actionCreator<IAuthRequest, IAuthCredentials>(AUTH_RE
 export const authRequestSuccess = actionCreator<IAuthRequestSuccess, IUser>(AUTH_REQUEST_SUCCESS);
 export const authRequestFailed = actionCreator<IAuthRequestFailed, string>(AUTH_REQUEST_FAILED);
 export const authOff = actionCreator<IAuthOff>(AUTH_OFF);
-
-export default {
-  authOff,
-  authRequestFailed,
-  authRequestSuccess,
-};
