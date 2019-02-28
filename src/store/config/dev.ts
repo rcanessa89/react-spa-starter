@@ -1,4 +1,6 @@
 import { IStore } from '@interfaces';
+import { router } from '@router';
+import { createRouterMiddleware } from '@uirouter/redux';
 import {
   applyMiddleware,
   combineReducers,
@@ -16,6 +18,7 @@ import rootReducer from '../rootReducers';
 declare const window: any;
 
 export default (): Store<IStore> => {
+  const routerMiddleware = createRouterMiddleware(router);
   const epicMiddleware: EpicMiddleware<any> = createEpicMiddleware();
   const reducers: Reducer = combineReducers(rootReducer);
   const logger: Middleware = createLogger({ collapsed: true });
@@ -23,7 +26,7 @@ export default (): Store<IStore> => {
   const store: Store = createStore(
     reducers,
     {},
-    composeEnhancers(applyMiddleware(epicMiddleware, logger))
+    composeEnhancers(applyMiddleware(routerMiddleware, epicMiddleware, logger))
   );
 
   epicMiddleware.run(combineEpics(...rootEpic));

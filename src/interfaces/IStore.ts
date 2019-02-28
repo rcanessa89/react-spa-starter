@@ -1,9 +1,7 @@
 import { IAuthState } from '@containers/auth/interfaces';
-import IFetch from './IFetch';
-import IRouterState from './IRouterState';
+// import IFetch from './IFetch';
 
 export default interface IStore {
   auth: IAuthState;
-  fetch: IFetch;
-  router: IRouterState;
+  fetch: any;
 };

@@ -16,9 +16,7 @@ render(App);
 if (process.env.NODE_ENV === 'development') {
   import('why-did-you-update')
     .then(({ whyDidYouUpdate }) => {
-      whyDidYouUpdate(React, {
-        exclude: RegExp(/^(Switch)$/)
-      });
+      whyDidYouUpdate(React);
     });
 }
 

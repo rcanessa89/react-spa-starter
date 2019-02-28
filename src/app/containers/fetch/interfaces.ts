@@ -35,12 +35,11 @@ export interface IFetchDataPayload {
 };
 
 export interface IFetchState {
-  readonly loading: boolean;
-  readonly request: AjaxRequest | null,
+  loading: boolean;
+  request: AjaxRequest | null,
 };
 
-export interface IFetchContainerChildProps {
-  fetch: IFetchState;
-  fetchData: (payload: IFetchDataPayload) => undefined;
-  fetchDataCancel: () => undefined;
+export interface IFetchDispatch {
+  fetchData: (payload: IFetchDataPayload) => {};
+  fetchDataCancel: () => {};
 }

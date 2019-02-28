@@ -18,17 +18,26 @@
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": true,
     "paths": {
+      "@img/*": [
+        "src/assets/img/*"
+      ],
+      "@containers/*": [
+        "src/app/containers/*"
+      ],
+      "@pages/*": [
+        "src/app/pages/*"
+      ],
+      "@pages": [
+        "src/app/pages"
+      ],
+      "@router": [
+        "src/router"
+      ],
       "@interfaces": [
         "src/interfaces"
       ],
       "@store": [
         "src/store"
-      ],
-      "@pages/*": [
-        "src/app/pages/*"
-      ],
-      "@router": [
-        "src/app/router"
       ],
       "@services": [
         "src/services"
@@ -38,12 +47,6 @@
       ],
       "@utils": [
         "src/utils"
-      ],
-      "@img/*": [
-        "src/assets/img/*"
-      ],
-      "@containers/*": [
-        "src/app/containers/*"
       ],
       "@constants": [
         "src/constants"
