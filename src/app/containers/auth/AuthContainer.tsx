@@ -41,8 +41,8 @@ const formikContainer = withFormik<IAuthState & IAuthDispatch, IAuthFormikValues
   }),
 });
 
-export default function authWrapper(Component: any) {
-  const formikForm = formikContainer(Component);
+export default function authWrapper(Component: any, withFormikContainer: boolean = true) {
+  const formikForm = withFormikContainer ? formikContainer(Component) : Component;
 
   return connect<IAuthState, IAuthDispatch>(mapStateToProps, mapDispatchToProps)(formikForm);
 };

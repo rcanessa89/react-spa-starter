@@ -6,7 +6,7 @@ import './login.css';
 const emailId = 'login-email-field';
 const passwordId = 'login-password-field';
 
-const Login: React.SFC<FormikProps<any>> = ({
+const Login: React.SFC<FormikProps<any>> = React.memo(({
   errors,
   handleBlur,
   handleChange,
@@ -51,6 +51,6 @@ const Login: React.SFC<FormikProps<any>> = ({
       </div>
     </div>
   );
-};
+});
 
 export default Login;

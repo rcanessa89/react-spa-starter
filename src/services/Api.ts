@@ -7,6 +7,13 @@ import {
 } from 'rxjs/ajax';
 
 type httpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+interface IHttpMethods {
+  delete: 'DELETE',
+  get: 'GET',
+  patch: 'PATCH',
+  post: 'POST',
+  put: 'PUT'
+}
 
 interface ICallParams {
   url: string;
@@ -14,7 +21,22 @@ interface ICallParams {
   body?: any;
 };
 
+const methods: IHttpMethods = {
+  delete: 'DELETE',
+  get: 'GET',
+  patch: 'PATCH',
+  post: 'POST',
+  put: 'PUT'
+};
+
+const urls = {
+  login: '/login',
+};
+
 export default class Api {
+  public static readonly methods = methods;
+  public static readonly urls = urls;
+
   private readonly baseUrl: string = getEnvVar('base_api_url');
   private readonly config: AjaxRequest;
   private readonly defaultConfig: AjaxRequest = {};
