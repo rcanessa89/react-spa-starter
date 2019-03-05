@@ -1,8 +1,6 @@
-export interface IRouterState {
-  transitioning: boolean;
-  last: any;
-};
+import { ROUTER_CHANGE } from './types';
 
-export interface IRouterDispatch {
-  triggerTransition: (to: string, params: any) => {};
+export interface IRouterChange {
+  type: ROUTER_CHANGE;
+  payload: string;
 }

@@ -1,6 +1,5 @@
 import { IStore } from '@interfaces';
-import { router } from '@router';
-import { createRouterMiddleware } from '@uirouter/redux';
+import { routerMiddleware } from '@router';
 import {
   applyMiddleware,
   combineReducers,
@@ -17,7 +16,6 @@ import rootEpic from '../rootEpics';
 import rootReducer from '../rootReducers';
 
 export default (): Store<IStore> => {
-  const routerMiddleware = createRouterMiddleware(router);
   const epicMiddleware: EpicMiddleware<any> = createEpicMiddleware();
   const reducers: Reducer = combineReducers(rootReducer);
   const middlewares = applyMiddleware(routerMiddleware, epicMiddleware);

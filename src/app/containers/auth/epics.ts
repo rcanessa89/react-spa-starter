@@ -1,18 +1,16 @@
-import { IStore } from '@interfaces';
-import { states } from '@router';
+import { history, paths } from '@router';
 import { Api } from '@services';
-import { triggerTransition } from '@uirouter/redux';
-import { ActionsObservable, Epic, ofType, StateObservable } from 'redux-observable';
+import { ActionsObservable, Epic, ofType } from 'redux-observable';
 import { of } from 'rxjs';
 import { AjaxError, AjaxResponse } from 'rxjs/ajax';
 import { catchError, map, mergeMap, tap } from 'rxjs/operators';
+import { routerChange } from '../router/actions';
 import { authRequestFailed, authRequestSuccess } from './actions';
 import { IAuthOff, IAuthRequest } from './interfaces';
 import { AUTH_OFF, AUTH_REQUEST } from './types';
 
 const authEpic: Epic = (
-  action$: ActionsObservable<IAuthRequest>,
-  state$: StateObservable<IStore>
+  action$: ActionsObservable<IAuthRequest>
 ) => action$.pipe(
   ofType(AUTH_REQUEST),
   mergeMap((action: IAuthRequest) => {
@@ -23,7 +21,7 @@ const authEpic: Epic = (
         map((xhr: AjaxResponse) => authRequestSuccess(xhr.response)),
         catchError((error: AjaxError) => of(authRequestFailed(error.message))),
         tap(undefined, undefined, () => {
-          state$.value.router.last.router.stateService.go(states.home.name);
+          history.push(paths.home);
         })
       );
   })
@@ -31,7 +29,7 @@ const authEpic: Epic = (
 
 const authOffEpic: Epic = (action$: ActionsObservable<IAuthOff>) => action$.pipe(
   ofType(AUTH_OFF),
-  mergeMap(() => of(triggerTransition(states.login.name, null)))
+  mergeMap(() => of(routerChange(paths.login)))
 );
 
 export default [
